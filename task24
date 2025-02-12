@@ -1,0 +1,88 @@
+class Library {
+    private int availableBooks;
+
+    public Library(int availableBooks) {
+        this.availableBooks = availableBooks;
+    }
+
+    // Synchronized method to borrow a book
+    public synchronized void borrowBook(String studentName) {
+        if (availableBooks > 0) {
+            System.out.println(studentName + " is borrowing a book...");
+            availableBooks--;
+            System.out.println(studentName + " borrowed a book. Books left: " + availableBooks);
+        } else {
+            System.out.println(studentName + " tried to borrow a book but none are available.");
+        }
+
+        // Simulating processing delay
+        try {
+            Thread.sleep(1000); // Simulates the time taken to process borrowing
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Synchronized method to return a book
+    public synchronized void returnBook(String studentName) {
+        System.out.println(studentName + " is returning a book...");
+        availableBooks++;
+        System.out.println(studentName + " returned a book. Books left: " + availableBooks);
+
+        // Simulating processing delay
+        try {
+            Thread.sleep(1000); // Simulates the time taken to process returning
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// Student thread class
+class Student extends Thread {
+    private Library library;
+    private String studentName;
+
+    public Student(Library library, String studentName) {
+        this.library = library;
+        this.studentName = studentName;
+    }
+
+    @Override
+    public void run() {
+        library.borrowBook(studentName);
+        try {
+            Thread.sleep(2000); // Simulates reading time
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        library.returnBook(studentName);
+    }
+}
+
+public class LibraryManagementSystem {
+    public static void main(String[] args) {
+        Library library = new Library(2); // Library has 2 books
+
+        // Creating student threads
+        Student s1 = new Student(library, "Alice");
+        Student s2 = new Student(library, "Bob");
+        Student s3 = new Student(library, "Charlie");
+
+        // Start student threads
+        s1.start();
+        s2.start();
+        s3.start();
+
+        // Using join() to wait for students to complete their transactions
+        try {
+            s1.join();
+            s2.join();
+            s3.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("All students have finished borrowing and returning books.");
+    }
+}
