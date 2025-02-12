@@ -1,0 +1,59 @@
+import java.util.*;
+
+public class IteratorPractice {
+    public static void main(String[] args) {
+        // Task 1: Iterator Practice
+        ArrayList<String> studentNames = new ArrayList<>();
+        studentNames.add("Alice");
+        studentNames.add("Bob");
+        studentNames.add("Andrew");
+        studentNames.add("Charlie");
+
+        System.out.println("Student Names:");
+        Iterator<String> iterator = studentNames.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        // Removing student whose name starts with "A"
+        iterator = studentNames.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().startsWith("A")) {
+                iterator.remove();
+            }
+        }
+
+        System.out.println("After removing names starting with 'A': " + studentNames);
+
+        // Task 2: ListIterator Practice
+        LinkedList<String> cityNames = new LinkedList<>();
+        cityNames.add("New York");
+        cityNames.add("Los Angeles");
+        cityNames.add("Chicago");
+        cityNames.add("Houston");
+
+        System.out.println("\nCities in forward order:");
+        ListIterator<String> listIterator = cityNames.listIterator();
+        while (listIterator.hasNext()) {
+            System.out.println(listIterator.next());
+        }
+
+        System.out.println("Cities in reverse order:");
+        while (listIterator.hasPrevious()) {
+            System.out.println(listIterator.previous());
+        }
+
+        // Task 3: Enumeration Practice
+        Vector<String> countryNames = new Vector<>();
+        countryNames.add("USA");
+        countryNames.add("Canada");
+        countryNames.add("UK");
+        countryNames.add("Australia");
+
+        System.out.println("\nCountry Names:");
+        Enumeration<String> enumeration = countryNames.elements();
+        while (enumeration.hasMoreElements()) {
+            System.out.println(enumeration.nextElement());
+        }
+    }
+}
