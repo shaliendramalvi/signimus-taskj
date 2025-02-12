@@ -1,0 +1,108 @@
+import java.util.*;
+
+// Student class implementing Comparable to sort by name
+class Student implements Comparable<Student> {
+    String name;
+    int age;
+    int rollNumber;
+
+    public Student(String name, int age, int rollNumber) {
+        this.name = name;
+        this.age = age;
+        this.rollNumber = rollNumber;
+    }
+
+    // Natural ordering: sort by name
+    @Override
+    public int compareTo(Student other) {
+        return this.name.compareTo(other.name);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{name='" + name + "', age=" + age + ", rollNumber=" + rollNumber + "}";
+    }
+}
+
+// Comparator to sort by age
+class AgeComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student s1, Student s2) {
+        return Integer.compare(s1.age, s2.age);
+    }
+}
+
+// Comparator to sort by roll number
+class RollNumberComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student s1, Student s2) {
+        return Integer.compare(s1.rollNumber, s2.rollNumber);
+    }
+}
+
+// Thread class for even numbers
+class EvenNumberThread extends Thread {
+    public void run() {
+        for (int i = 2; i <= 10; i += 2) {
+            System.out.println("Even: " + i);
+            try {
+                Thread.sleep(500); // Delay for better visualization
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+// Thread class for odd numbers
+class OddNumberThread extends Thread {
+    public void run() {
+        for (int i = 1; i < 10; i += 2) {
+            System.out.println("Odd: " + i);
+            try {
+                Thread.sleep(500); // Delay for better visualization
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class StudentSorterAndThreads {
+    public static void main(String[] args) {
+        // Creating a list of Student objects
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Alice", 22, 103));
+        students.add(new Student("Bob", 20, 101));
+        students.add(new Student("Charlie", 21, 102));
+        students.add(new Student("David", 19, 104));
+
+        // Sorting by natural order (name)
+        Collections.sort(students);
+        System.out.println("Sorted by Name:");
+        for (Student s : students) {
+            System.out.println(s);
+        }
+
+        // Sorting by age
+        Collections.sort(students, new AgeComparator());
+        System.out.println("\nSorted by Age:");
+        for (Student s : students) {
+            System.out.println(s);
+        }
+
+        // Sorting by roll number
+        Collections.sort(students, new RollNumberComparator());
+        System.out.println("\nSorted by Roll Number:");
+        for (Student s : students) {
+            System.out.println(s);
+        }
+
+        // Running threads for even and odd numbers
+        EvenNumberThread evenThread = new EvenNumberThread();
+        OddNumberThread oddThread = new OddNumberThread();
+
+        evenThread.start();
+        oddThread.start();
+    }
+}
