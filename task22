@@ -1,0 +1,28 @@
+Sorted by Name:
+Student{name='Alice', age=22, rollNumber=103}
+Student{name='Bob', age=20, rollNumber=101}
+Student{name='Charlie', age=21, rollNumber=102}
+Student{name='David', age=19, rollNumber=104}
+
+Sorted by Age:
+Student{name='David', age=19, rollNumber=104}
+Student{name='Bob', age=20, rollNumber=101}
+Student{name='Charlie', age=21, rollNumber=102}
+Student{name='Alice', age=22, rollNumber=103}
+
+Sorted by Roll Number:
+Student{name='Bob', age=20, rollNumber=101}
+Student{name='Charlie', age=21, rollNumber=102}
+Student{name='Alice', age=22, rollNumber=103}
+Student{name='David', age=19, rollNumber=104}
+
+Even: 2
+Odd: 1
+Even: 4
+Odd: 3
+Even: 6
+Odd: 5
+Even: 8
+Odd: 7
+Even: 10
+Odd: 9
